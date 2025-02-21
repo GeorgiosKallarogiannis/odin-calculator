@@ -5,3 +5,29 @@
 body {
     margin: 0;
 }
+
+.keyboard-wrapper {
+    width: clamp(20em, 100%, 26.875em);
+    background-color: hsla(240, 100%, 70%, 0.3);
+
+    .display {
+        background-color: hsla(0, 100%, 70%, 0.5);
+    }
+
+    .keyboard {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+    }
+
+    .keyboard > .keyboard-row {
+        display: flex;
+        gap: 0.25em;
+
+        .input {
+            flex: 1;
+            text-align: center;
+            background-color: hsl(208, 100%, 97%);
+        }
+    }
+}
