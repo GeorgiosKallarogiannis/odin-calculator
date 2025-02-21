@@ -6,6 +6,6 @@ function subtract(firstNumber, secondNumber) {
     return firstNumber - secondNumber;
 }
 
-if (typeof module === 'object') {
-    module.exports = add;
+if (typeof module === "object") {
+    module.exports = { add, subtract };
 }
