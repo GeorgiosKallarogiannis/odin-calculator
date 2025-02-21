@@ -10,6 +10,18 @@ function multiply(firstNumber, secondNumber) {
     return firstNumber * secondNumber;
 }
 
+function divide(firstNumber, secondNumber) {
+    const quotient = firstNumber / secondNumber;
+    const divisionByZero = "Division by 0 not possible";
+
+    return quotient === Infinity ? divisionByZero : quotient;
+}
+
 if (typeof module === "object") {
-    module.exports = { add, subtract, multiply };
+    module.exports = {
+        add,
+        subtract,
+        multiply,
+        divide,
+    };
 }
