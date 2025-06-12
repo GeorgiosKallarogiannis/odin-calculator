@@ -1,26 +1,83 @@
-const firstOperand = "";
-const secondOperand = "";
-const operator = "";
+let firstOperand = "";
+let secondOperand = "";
+let operator = "";
+let result = 0;
 
-function operate(firstOperand, operator, secondOperand) {
-    const firstNumber = Number(firstOperand);
-    const secondNumber = Number(secondOperand);
+const keyboard = document.querySelector(".keyboard");
+const display = document.querySelector(".display");
 
-    switch (operator) {
-        case "+":
-            add(firstNumber, secondNumber);
-            break;
-        case "-":
-            subtract(firstNumber, secondNumber);
-            break;
-        case "*":
-            multiply(firstNumber, secondNumber);
-            break;
-        case "/":
-            divide(firstNumber, secondNumber);
-            break;
+keyboard.addEventListener("click", (e) => {
+    if (e.target.classList.contains("operation-field")) {
+        if (!operator) {
+            operator = e.target.innerText;
+            console.log({ operator });
+        }
     }
-}
+
+    if (e.target.classList.contains("num-field")) {
+        if (result) {
+            display.innerText = "";
+            result = 0;
+        }
+
+        if (!operator) {
+            firstOperand += e.target.innerText;
+            console.log({ firstOperand });
+        } else {
+            secondOperand += e.target.innerText;
+            console.log({ secondOperand });
+        }
+    }
+
+    if (e.target.classList.contains("input")) {
+        if (result) {
+            display.innerText = "";
+            result = 0;
+        }
+
+        display.innerText += e.target.innerText;
+    }
+
+    if (e.target.classList.contains("equal-field")) {
+        switch (operator) {
+            case "+":
+                result = add(
+                    parseFloat(firstOperand.replace(",", ".")),
+                    parseFloat(secondOperand.replace(",", "."))
+                );
+                break;
+            case "-":
+                result = subtract(
+                    parseFloat(firstOperand.replace(",", ".")),
+                    parseFloat(secondOperand.replace(",", "."))
+                );
+                break;
+            case "*":
+                result = multiply(
+                    parseFloat(firstOperand.replace(",", ".")),
+                    parseFloat(secondOperand.replace(",", "."))
+                );
+                break;
+            case "/":
+                result = divide(
+                    parseFloat(firstOperand.replace(",", ".")),
+                    parseFloat(secondOperand.replace(",", "."))
+                );
+                break;
+            default:
+                break;
+        }
+
+        display.innerText = result;
+        firstOperand = secondOperand = operator = "";
+    }
+
+    if (e.target.classList.contains("clear-field")) {
+        firstOperand = secondOperand = operator = "";
+        result = 0;
+        display.innerText = "";
+    }
+});
 
 function add(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
@@ -39,13 +96,4 @@ function divide(firstNumber, secondNumber) {
     const divisionByZero = "Division by 0 not possible";
 
     return quotient === Infinity ? divisionByZero : quotient;
-}
-
-if (typeof module === "object") {
-    module.exports = {
-        add,
-        subtract,
-        multiply,
-        divide,
-    };
 }
